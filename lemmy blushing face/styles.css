@@ -1,0 +1,148 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  animation: eye-blink 5.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+}
+
+.eye--right {
+  left: 58.984375%;
+}
+
+.eye__pupil {
+  position: absolute;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+}
+
+.eye--right .eye__pupil {
+  left: 16.2790698%;
+}
+
+.eye__highlight {
+  position: absolute;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 48%) 0%,
+    rgb(255 255 255 / 30%) 48%,
+    rgb(255 255 255 / 12%) 100%
+  );
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+}
+
+.blush {
+  position: absolute;
+  top: 30.0520833%;
+  width: 18.671875%;
+  height: 4.8958333%;
+  border-radius: 50%;
+  background: #ff8dc0;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
+  animation: blush-bloom 3.2s ease-in-out infinite;
+}
+
+.blush--left {
+  left: 8.125%;
+}
+
+.blush--right {
+  left: 73.203125%;
+}
+
+.is-paused .eye,
+.is-paused .blush {
+  animation-play-state: paused;
+}
+
+@keyframes eye-blink {
+  0%,
+  42%,
+  48%,
+  51%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  45%,
+  50% {
+    transform: scaleY(0.075);
+  }
+}
+
+@keyframes blush-bloom {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(0.96);
+  }
+
+  48% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+
+  68% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye,
+  .blush {
+    animation: none;
+  }
+}
