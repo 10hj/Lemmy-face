@@ -1,0 +1,244 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  animation: normal-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+}
+
+.eye--right {
+  left: 58.984375%;
+}
+
+.eye__pupil {
+  position: absolute;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+}
+
+.eye__highlight {
+  position: absolute;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 48%) 0%, rgb(255 255 255 / 30%) 48%, rgb(255 255 255 / 12%) 100%);
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+}
+
+.eye--right .eye__pupil {
+  left: 16.2790698%;
+}
+
+.eye--right .eye__highlight {
+  left: 28.4883721%;
+}
+
+.smile-eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  height: 8.9583333%;
+  border: 2.65625cqw solid #fff;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  opacity: 0;
+  transform: scaleY(0.08);
+  transform-origin: 50% 100%;
+  will-change: opacity, transform;
+  animation: smile-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.smile-eye--left {
+  left: 14.140625%;
+}
+
+.smile-eye--right {
+  left: 58.984375%;
+}
+
+.note {
+  position: absolute;
+  display: block;
+  transform-origin: 50% 80%;
+  will-change: transform;
+  animation: note-groove var(--beat) cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.is-paused .eye,
+.is-paused .smile-eye,
+.is-paused .note {
+  animation-play-state: paused;
+}
+
+.note--large {
+  --beat: 1.45s;
+  --lift: -10%;
+  --tilt: -7deg;
+  top: 34.53125%;
+  left: 57.109375%;
+  width: 8.203125%;
+  height: 9.53125%;
+}
+
+.note--medium {
+  --beat: 1.7s;
+  --lift: -7%;
+  --tilt: 5deg;
+  top: 30.9375%;
+  left: 67.96875%;
+  width: 14.21875%;
+  height: 9.4791667%;
+  animation-delay: -0.38s;
+}
+
+.note--small {
+  --beat: 1.25s;
+  --lift: -12%;
+  --tilt: 8deg;
+  top: 25.78125%;
+  left: 86.09375%;
+  width: 5.703125%;
+  height: 8.75%;
+  animation-delay: -0.72s;
+}
+
+@keyframes note-groove {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+  }
+
+  20% {
+    transform: translateY(var(--lift)) rotate(var(--tilt)) scale(1.035);
+  }
+
+  42% {
+    transform: translateY(2%) rotate(calc(var(--tilt) * -0.35)) scale(0.985);
+  }
+
+  66% {
+    transform: translateY(calc(var(--lift) * 0.55)) rotate(calc(var(--tilt) * 0.45)) scale(1.02);
+  }
+
+  82% {
+    transform: translateY(1%) rotate(calc(var(--tilt) * -0.18)) scale(0.995);
+  }
+}
+
+@keyframes normal-eye-cycle {
+  0%,
+  20%,
+  23%,
+  40%,
+  43%,
+  62%,
+  86%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  21.5%,
+  41.5% {
+    opacity: 1;
+    transform: scaleY(0.075);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scaleY(0.06);
+  }
+
+  66%,
+  82.5% {
+    opacity: 0;
+    transform: scaleY(0.06);
+  }
+
+  83% {
+    opacity: 1;
+    transform: scaleY(0.06);
+  }
+}
+
+@keyframes smile-eye-cycle {
+  0%,
+  64%,
+  84%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.06);
+  }
+
+  65% {
+    opacity: 1;
+    transform: scaleY(0.06);
+  }
+
+  71%,
+  80.5% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  82.5% {
+    opacity: 1;
+    transform: scaleY(0.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note,
+  .eye,
+  .smile-eye {
+    animation: none;
+  }
+}
