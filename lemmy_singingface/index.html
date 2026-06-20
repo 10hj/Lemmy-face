@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <title>Lemmy Face</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="artwork" aria-label="깜빡이는 두 눈과 움직이는 컬러 음표">
+      <div class="eye eye--left" aria-hidden="true">
+        <span class="eye__pupil"></span>
+        <span class="eye__highlight"></span>
+      </div>
+
+      <div class="eye eye--right" aria-hidden="true">
+        <span class="eye__pupil"></span>
+        <span class="eye__highlight"></span>
+      </div>
+
+      <img class="note note--large" src="./assets/tear-large.svg" alt="" />
+      <img class="note note--medium" src="./assets/tear-medium.svg" alt="" />
+      <img class="note note--small" src="./assets/tear-small.svg" alt="" />
+    </main>
+  </body>
+</html>
