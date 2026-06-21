@@ -1,0 +1,263 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  z-index: 1;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  animation: blink 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+}
+
+.eye--right {
+  left: 58.984375%;
+}
+
+.eye__pupil {
+  position: absolute;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+}
+
+.eye__highlight {
+  position: absolute;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 40%);
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+}
+
+.tear-system {
+  --tear-blue: #8acbf3;
+  position: absolute;
+  z-index: 0;
+  top: 24.35%;
+  left: 75.546875%;
+  width: 10.234375%;
+  height: 50%;
+}
+
+.tear-filter {
+  position: absolute;
+}
+
+.tear-fluid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  filter: url(#tear-goo);
+}
+
+.tear-pool {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 72%;
+  height: 2.1%;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: var(--tear-blue);
+  transform: translateX(-50%) scale(0, 0.2);
+  transform-origin: 50% 0%;
+  will-change: opacity, transform;
+  animation: tear-pool 4.8s ease-in-out infinite;
+}
+
+.tear-neck {
+  position: absolute;
+  top: 0.6%;
+  left: 50%;
+  width: 14%;
+  height: 15%;
+  border-radius: 0 0 50% 50%;
+  background: var(--tear-blue);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: 50% 0;
+  will-change: opacity, transform;
+  animation: tear-neck 4.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.tear-drop {
+  position: absolute;
+  top: 1.4%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 8%;
+  will-change: opacity, transform;
+  animation: tear-drop 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.is-paused .eye,
+.is-paused .tear-pool,
+.is-paused .tear-neck,
+.is-paused .tear-drop {
+  animation-play-state: paused;
+}
+
+@keyframes blink {
+  0%,
+  43%,
+  47%,
+  82%,
+  86%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  45%,
+  84% {
+    transform: scaleY(0.07);
+  }
+}
+
+@keyframes tear-pool {
+  0%,
+  5%,
+  58%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0, 0.2);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translateX(-50%) scale(0.45, 0.65);
+  }
+
+  24% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1, 1);
+  }
+
+  42% {
+    opacity: 1;
+    transform: translateX(-50%) scale(0.36, 0.7);
+  }
+
+  51% {
+    opacity: 0.65;
+    transform: translateX(-50%) scale(0.12, 0.35);
+  }
+}
+
+@keyframes tear-neck {
+  0%,
+  20%,
+  53%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  27% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(0.18);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(0.72);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+@keyframes tear-drop {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translateY(-4%) scale(0.08, 0.04);
+  }
+
+  26% {
+    opacity: 1;
+    transform: translateY(-2%) scale(0.32, 0.2);
+  }
+
+  39% {
+    opacity: 1;
+    transform: translateY(2%) scale(0.66, 0.54);
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateY(12%) scale(0.96, 1.08);
+  }
+
+  53% {
+    opacity: 1;
+    transform: translateY(23%) scale(1, 1);
+  }
+
+  76% {
+    opacity: 1;
+    transform: translateY(165%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(390%) scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye,
+  .tear-pool,
+  .tear-neck,
+  .tear-drop {
+    animation: none;
+  }
+}
