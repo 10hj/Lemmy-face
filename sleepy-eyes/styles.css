@@ -1,0 +1,331 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: transform, translate;
+  animation:
+    normal-eye-cycle 16s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    sleepy-drift 9s ease-in-out infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+}
+
+.eye--right {
+  left: 58.984375%;
+}
+
+.eye__pupil {
+  position: absolute;
+  z-index: 1;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  will-change: transform;
+  animation: sleepy-gaze 16s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.eye__highlight {
+  position: absolute;
+  z-index: 2;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 48%) 0%, rgb(255 255 255 / 30%) 48%, rgb(255 255 255 / 12%) 100%);
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+  will-change: transform;
+  animation: sleepy-highlight 16s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.sleep-eye {
+  position: absolute;
+  z-index: 3;
+  top: 17.5%;
+  width: 26.875%;
+  height: 8.9583333%;
+  border: 2.65625cqw solid #fff;
+  border-top: 0;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  opacity: 0;
+  transform: scaleY(0.06);
+  transform-origin: 50% 0;
+  will-change: opacity, transform, translate;
+  animation:
+    sleep-eye-cycle 16s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    sleepy-drift 9s ease-in-out infinite;
+}
+
+.sleep-eye--left {
+  left: 14.140625%;
+}
+
+.sleep-eye--right {
+  left: 58.984375%;
+}
+
+.z-stream {
+  position: absolute;
+  /* Keep the full Z trajectory inside the artwork's clipped canvas. */
+  inset: 0 4cqw 0 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.sleep-z {
+  position: absolute;
+  display: block;
+  height: auto;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
+  animation: z-stream-float 16s ease-out infinite;
+}
+
+.sleep-z--1 {
+  top: 12.5%;
+  left: 72%;
+  width: 4.8%;
+}
+
+.sleep-z--2 {
+  top: 8.8%;
+  left: 79%;
+  width: 5.9%;
+  animation-delay: 1.25s;
+}
+
+.sleep-z--3 {
+  top: 6.8%;
+  left: 87%;
+  width: 7.1%;
+  animation-delay: 2.5s;
+}
+
+.sleep-z--4 {
+  top: 13.2%;
+  left: 75%;
+  width: 5.3%;
+  animation-delay: 3.75s;
+}
+
+.sleep-z--5 {
+  top: 9.6%;
+  left: 84%;
+  width: 7.9%;
+  animation-delay: 5s;
+}
+
+.sleep-z--6 {
+  top: 7.5%;
+  left: 91%;
+  width: 9.1%;
+  animation-delay: 6.25s;
+}
+
+.is-paused .eye,
+.is-paused .eye__pupil,
+.is-paused .eye__highlight,
+.is-paused .sleep-eye,
+.is-paused .sleep-z {
+  animation-play-state: paused;
+}
+
+@keyframes normal-eye-cycle {
+  0%,
+  12%,
+  16%,
+  29%,
+  92%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  14%,
+  31%,
+  90% {
+    opacity: 1;
+    transform: scaleY(0.07);
+  }
+
+  33%,
+  88% {
+    opacity: 0;
+    transform: scaleY(0.07);
+  }
+}
+
+@keyframes sleep-eye-cycle {
+  0%,
+  31%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.06);
+  }
+
+  33% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+
+  40%,
+  84% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  88% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes sleepy-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  18% {
+    transform: translate(-0.9cqw, 0.5cqw);
+  }
+
+  31% {
+    transform: translate(0.8cqw, 1.1cqw);
+  }
+
+  45%,
+  86% {
+    transform: translate(0, 2.2cqw);
+  }
+
+  94% {
+    transform: translate(-0.4cqw, 0.8cqw);
+  }
+}
+
+@keyframes sleepy-highlight {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  18% {
+    transform: translate(-0.9cqw, 0.5cqw);
+  }
+
+  31% {
+    transform: translate(0.8cqw, 1.1cqw);
+  }
+
+  45%,
+  86% {
+    transform: translate(0, 2.2cqw);
+  }
+
+  94% {
+    transform: translate(-0.4cqw, 0.8cqw);
+  }
+}
+
+@keyframes sleepy-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  30% {
+    translate: 0.35cqw 0.3cqw;
+  }
+
+  60% {
+    translate: -0.25cqw 0.7cqw;
+  }
+
+  82% {
+    translate: 0.2cqw 0.95cqw;
+  }
+}
+
+@keyframes z-stream-float {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translate(-0.8cqw, 1.6cqw) rotate(-8deg) scale(0.3);
+  }
+
+  36% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(-4deg) scale(0.72);
+  }
+
+  44% {
+    opacity: 1;
+    transform: translate(1.5cqw, -3.5cqw) rotate(1deg) scale(1);
+  }
+
+  52% {
+    opacity: 0;
+    transform: translate(3.2cqw, -8.2cqw) rotate(7deg) scale(0.82);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(3.2cqw, -8.2cqw) rotate(7deg) scale(0.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye,
+  .eye__pupil,
+  .eye__highlight,
+  .sleep-eye,
+  .sleep-z {
+    animation: none;
+  }
+}
