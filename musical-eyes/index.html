@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <title>Musical Eyes</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="artwork" aria-label="Happy eyes moving to music with colorful notes">
+      <div class="eye eye--left" aria-hidden="true">
+        <span class="eye__pupil"></span>
+        <span class="eye__highlight"></span>
+      </div>
+
+      <div class="eye eye--right" aria-hidden="true">
+        <span class="eye__pupil"></span>
+        <span class="eye__highlight"></span>
+      </div>
+
+      <span class="happy-eye happy-eye--left" aria-hidden="true"></span>
+      <span class="happy-eye happy-eye--right" aria-hidden="true"></span>
+
+      <img class="note note--orange" src="./assets/note-orange.svg" alt="" aria-hidden="true" />
+      <img class="note note--purple" src="./assets/note-purple.svg" alt="" aria-hidden="true" />
+      <img class="note note--blue" src="./assets/note-blue.svg" alt="" aria-hidden="true" />
+    </main>
+  </body>
+</html>

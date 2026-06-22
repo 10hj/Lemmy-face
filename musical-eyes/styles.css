@@ -1,0 +1,325 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform, translate;
+  animation:
+    normal-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    eye-groove 1.8s ease-in-out infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+  animation-delay: 0s, -0.12s;
+}
+
+.eye--right {
+  left: 58.984375%;
+  animation-delay: 0s, 0s;
+}
+
+.eye__pupil {
+  position: absolute;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  will-change: transform;
+  animation: musical-gaze 5.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.eye__highlight {
+  position: absolute;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 48%) 0%, rgb(255 255 255 / 30%) 48%, rgb(255 255 255 / 12%) 100%);
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+  will-change: transform;
+  animation: musical-highlight 5.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.happy-eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  height: 8.9583333%;
+  border: 2.65625cqw solid #fff;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  opacity: 0;
+  transform: scaleY(0.06);
+  transform-origin: 50% 100%;
+  will-change: opacity, transform, translate;
+  animation:
+    happy-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    eye-groove 1.8s ease-in-out infinite;
+}
+
+.happy-eye--left {
+  left: 14.140625%;
+  animation-delay: 0s, -0.12s;
+}
+
+.happy-eye--right {
+  left: 58.984375%;
+}
+
+.note {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  transform-origin: 50% 80%;
+  will-change: opacity, transform;
+  animation: note-groove var(--beat) cubic-bezier(0.32, 0, 0.2, 1) infinite;
+}
+
+.note--orange {
+  --beat: 1.45s;
+  --lift: -10%;
+  --half-lift: -5.5%;
+  --tilt: -8deg;
+  --tilt-back: 2.8deg;
+  --tilt-mid: -4deg;
+  --tilt-end: 1.6deg;
+  top: 34.53125%;
+  left: 57.109375%;
+  width: 8.203125%;
+  height: 9.53125%;
+}
+
+.note--purple {
+  --beat: 1.7s;
+  --lift: -8%;
+  --half-lift: -4.4%;
+  --tilt: 6deg;
+  --tilt-back: -2.1deg;
+  --tilt-mid: 3deg;
+  --tilt-end: -1.2deg;
+  top: 30.9375%;
+  left: 67.96875%;
+  width: 14.21875%;
+  height: 9.4791667%;
+  animation-delay: -0.38s;
+}
+
+.note--blue {
+  --beat: 1.25s;
+  --lift: -12%;
+  --half-lift: -6.6%;
+  --tilt: 9deg;
+  --tilt-back: -3.15deg;
+  --tilt-mid: 4.5deg;
+  --tilt-end: -1.8deg;
+  top: 25.78125%;
+  left: 86.09375%;
+  width: 5.703125%;
+  height: 8.75%;
+  animation-delay: -0.72s;
+}
+
+.is-paused .eye,
+.is-paused .eye__pupil,
+.is-paused .eye__highlight,
+.is-paused .happy-eye,
+.is-paused .note {
+  animation-play-state: paused;
+}
+
+@keyframes normal-eye-cycle {
+  0%,
+  18%,
+  22%,
+  38%,
+  42%,
+  61%,
+  86%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  20%,
+  40%,
+  63%,
+  84% {
+    opacity: 1;
+    transform: scaleY(0.07);
+  }
+
+  64%,
+  82% {
+    opacity: 0;
+    transform: scaleY(0.07);
+  }
+}
+
+@keyframes happy-eye-cycle {
+  0%,
+  62%,
+  85%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.06);
+  }
+
+  64% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+
+  69%,
+  80% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  83% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes eye-groove {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  22% {
+    translate: 0 -0.45cqw;
+  }
+
+  46% {
+    translate: 0.5cqw 0.2cqw;
+  }
+
+  68% {
+    translate: -0.35cqw -0.25cqw;
+  }
+
+  84% {
+    translate: 0 0.25cqw;
+  }
+}
+
+@keyframes musical-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  18% {
+    transform: translate(1.05cqw, -0.45cqw);
+  }
+
+  38% {
+    transform: translate(1.45cqw, 0.55cqw);
+  }
+
+  58% {
+    transform: translate(-0.75cqw, 0.85cqw);
+  }
+
+  78% {
+    transform: translate(-1.1cqw, -0.25cqw);
+  }
+}
+
+@keyframes musical-highlight {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  18% {
+    transform: translate(1.05cqw, -0.45cqw);
+  }
+
+  38% {
+    transform: translate(1.45cqw, 0.55cqw);
+  }
+
+  58% {
+    transform: translate(-0.75cqw, 0.85cqw);
+  }
+
+  78% {
+    transform: translate(-1.1cqw, -0.25cqw);
+  }
+}
+
+@keyframes note-groove {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+  }
+
+  18% {
+    transform: translateY(var(--lift)) rotate(var(--tilt)) scale(1.07);
+  }
+
+  36% {
+    transform: translateY(2%) rotate(var(--tilt-back)) scale(0.97);
+  }
+
+  58% {
+    transform: translateY(var(--half-lift)) rotate(var(--tilt-mid)) scale(1.035);
+  }
+
+  78% {
+    transform: translateY(1%) rotate(var(--tilt-end)) scale(0.99);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye,
+  .eye__pupil,
+  .eye__highlight,
+  .happy-eye,
+  .note {
+    animation: none;
+  }
+}
