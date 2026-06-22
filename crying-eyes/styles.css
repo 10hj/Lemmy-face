@@ -42,8 +42,10 @@ body {
   border-radius: 50%;
   background: #fff;
   transform-origin: 50% 50%;
-  will-change: transform;
-  animation: blink 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: opacity, transform, translate;
+  animation:
+    normal-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    eye-drift 8.5s ease-in-out infinite;
 }
 
 .eye--left {
@@ -62,6 +64,8 @@ body {
   aspect-ratio: 1;
   border-radius: 50%;
   background: #000;
+  will-change: transform;
+  animation: pupil-gaze 9s cubic-bezier(0.45, 0, 0.2, 1) infinite;
 }
 
 .eye__highlight {
@@ -73,6 +77,36 @@ body {
   border-radius: 50%;
   background: rgb(255 255 255 / 40%);
   filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+  will-change: transform;
+  animation: highlight-gaze 9s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.sad-eye {
+  position: absolute;
+  z-index: 1;
+  /* Start at the round eye's horizontal center and occupy its lower half. */
+  top: 17.5%;
+  width: 26.875%;
+  height: 8.9583333%;
+  border: 2.65625cqw solid #fff;
+  border-top: 0;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  opacity: 0;
+  transform: scaleY(0.06);
+  /* Unfold downward from the same center line where the round eye closes. */
+  transform-origin: 50% 0;
+  will-change: opacity, transform, translate;
+  animation:
+    sad-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    sad-eye-drift 8.5s ease-in-out infinite;
+}
+
+.sad-eye--left {
+  left: 14.140625%;
+}
+
+.sad-eye--right {
+  left: 58.984375%;
 }
 
 .tear-system {
@@ -107,7 +141,7 @@ body {
   transform: translateX(-50%) scale(0, 0.2);
   transform-origin: 50% 0%;
   will-change: opacity, transform;
-  animation: tear-pool 4.8s ease-in-out infinite;
+  animation: tear-pool 14s ease-in-out infinite;
 }
 
 .tear-neck {
@@ -121,7 +155,7 @@ body {
   transform: translateX(-50%) scaleY(0);
   transform-origin: 50% 0;
   will-change: opacity, transform;
-  animation: tear-neck 4.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  animation: tear-neck 14s cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
 
 .tear-drop {
@@ -134,57 +168,191 @@ body {
   overflow: visible;
   transform-origin: 50% 8%;
   will-change: opacity, transform;
-  animation: tear-drop 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: tear-drop 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* A second tear cycle lands in the open-eye portion of the 14-second loop. */
+.tear-system--open .tear-pool,
+.tear-system--open .tear-neck,
+.tear-system--open .tear-drop {
+  animation-delay: -6s;
 }
 
 .is-paused .eye,
+.is-paused .eye__pupil,
+.is-paused .eye__highlight,
+.is-paused .sad-eye,
 .is-paused .tear-pool,
 .is-paused .tear-neck,
 .is-paused .tear-drop {
   animation-play-state: paused;
 }
 
-@keyframes blink {
+@keyframes normal-eye-cycle {
   0%,
-  43%,
-  47%,
-  82%,
-  86%,
+  18%,
+  22%,
+  35%,
+  39%,
+  59%,
+  84%,
   100% {
+    opacity: 1;
     transform: scaleY(1);
   }
 
-  45%,
-  84% {
+  20%,
+  37%,
+  61%,
+  82% {
+    opacity: 1;
     transform: scaleY(0.07);
+  }
+
+  62%,
+  80% {
+    opacity: 0;
+    transform: scaleY(0.07);
+  }
+}
+
+@keyframes sad-eye-cycle {
+  0%,
+  60%,
+  82%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.06);
+  }
+
+  62% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+
+  68%,
+  78% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes eye-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  24% {
+    translate: 0.7cqw -0.3cqw;
+  }
+
+  49% {
+    translate: -0.55cqw 0.45cqw;
+  }
+
+  73% {
+    translate: 0.25cqw 0.7cqw;
+  }
+}
+
+@keyframes sad-eye-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  24% {
+    translate: 0.7cqw -0.3cqw;
+  }
+
+  49% {
+    translate: -0.55cqw 0.45cqw;
+  }
+
+  73% {
+    translate: 0.25cqw 0.7cqw;
+  }
+}
+
+@keyframes pupil-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  18% {
+    transform: translate(-1.15cqw, 0.55cqw);
+  }
+
+  36% {
+    transform: translate(1.25cqw, 0.75cqw);
+  }
+
+  52%,
+  68% {
+    transform: translate(0.15cqw, 1.55cqw);
+  }
+
+  82% {
+    transform: translate(-0.65cqw, 0.95cqw);
+  }
+}
+
+@keyframes highlight-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  18% {
+    transform: translate(-1.15cqw, 0.55cqw);
+  }
+
+  36% {
+    transform: translate(1.25cqw, 0.75cqw);
+  }
+
+  52%,
+  68% {
+    transform: translate(0.15cqw, 1.55cqw);
+  }
+
+  82% {
+    transform: translate(-0.65cqw, 0.95cqw);
   }
 }
 
 @keyframes tear-pool {
   0%,
-  5%,
-  58%,
+  54%,
+  74%,
   100% {
     opacity: 0;
     transform: translateX(-50%) scale(0, 0.2);
   }
 
-  12% {
+  58% {
     opacity: 1;
     transform: translateX(-50%) scale(0.45, 0.65);
   }
 
-  24% {
+  62% {
     opacity: 1;
     transform: translateX(-50%) scale(1, 1);
   }
 
-  42% {
+  68% {
     opacity: 1;
     transform: translateX(-50%) scale(0.36, 0.7);
   }
 
-  51% {
+  72% {
     opacity: 0.65;
     transform: translateX(-50%) scale(0.12, 0.35);
   }
@@ -192,24 +360,24 @@ body {
 
 @keyframes tear-neck {
   0%,
-  20%,
-  53%,
+  60%,
+  74%,
   100% {
     opacity: 0;
     transform: translateX(-50%) scaleY(0);
   }
 
-  27% {
+  63% {
     opacity: 1;
     transform: translateX(-50%) scaleY(0.18);
   }
 
-  40% {
+  68% {
     opacity: 1;
     transform: translateX(-50%) scaleY(0.72);
   }
 
-  48% {
+  71% {
     opacity: 1;
     transform: translateX(-50%) scaleY(1);
   }
@@ -217,36 +385,37 @@ body {
 
 @keyframes tear-drop {
   0%,
-  18% {
+  58% {
     opacity: 0;
     transform: translateY(-4%) scale(0.08, 0.04);
   }
 
-  26% {
+  62% {
     opacity: 1;
     transform: translateY(-2%) scale(0.32, 0.2);
   }
 
-  39% {
+  68% {
     opacity: 1;
     transform: translateY(2%) scale(0.66, 0.54);
   }
 
-  48% {
+  72% {
     opacity: 1;
     transform: translateY(12%) scale(0.96, 1.08);
   }
 
-  53% {
+  74% {
     opacity: 1;
     transform: translateY(23%) scale(1, 1);
   }
 
-  76% {
+  82% {
     opacity: 1;
     transform: translateY(165%) scale(1);
   }
 
+  88%,
   100% {
     opacity: 0;
     transform: translateY(390%) scale(0.96);
@@ -255,6 +424,9 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .eye,
+  .eye__pupil,
+  .eye__highlight,
+  .sad-eye,
   .tear-pool,
   .tear-neck,
   .tear-drop {

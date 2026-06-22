@@ -20,7 +20,10 @@
         <span class="eye__highlight"></span>
       </div>
 
-      <div class="tear-system" aria-hidden="true">
+      <span class="sad-eye sad-eye--left" aria-hidden="true"></span>
+      <span class="sad-eye sad-eye--right" aria-hidden="true"></span>
+
+      <div class="tear-system tear-system--sad" aria-hidden="true">
         <svg class="tear-filter" width="0" height="0" focusable="false">
           <filter id="tear-goo" x="-100%" y="-20%" width="300%" height="180%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
@@ -34,6 +37,14 @@
           </filter>
         </svg>
 
+        <div class="tear-fluid">
+          <span class="tear-pool"></span>
+          <span class="tear-neck"></span>
+          <img class="tear-drop" src="./assets/tear.svg" alt="" />
+        </div>
+      </div>
+
+      <div class="tear-system tear-system--open" aria-hidden="true">
         <div class="tear-fluid">
           <span class="tear-pool"></span>
           <span class="tear-neck"></span>

@@ -30,6 +30,9 @@ Then visit `http://localhost:4173`.
 - `.tear-pool`: water gathering beneath the eye
 - `.tear-neck`: the narrowing connection created by surface tension
 - `.tear-drop`: the SVG drop separating and falling
+- `.tear-system--open`: a second offset tear that falls while the eyes are open
+- `.eye__pupil` and `.eye__highlight`: a slow wandering, downward-looking gaze
+- `.sad-eye`: inverted half-moon eyes shown during the sad-expression phase
 - `app.js`: pauses animations while the browser tab is hidden
 
 The artwork respects `prefers-reduced-motion` and scales to a 2:3 portrait canvas.
