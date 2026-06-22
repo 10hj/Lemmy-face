@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <title>Dizzy Eyes</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="artwork" aria-label="Eyes shaking and changing into spinning spirals">
+      <div class="eye eye--left" aria-hidden="true">
+        <span class="eye__pupil"></span>
+        <span class="eye__highlight"></span>
+      </div>
+
+      <div class="eye eye--right" aria-hidden="true">
+        <span class="eye__pupil"></span>
+        <span class="eye__highlight"></span>
+      </div>
+
+      <div class="spiral-eye spiral-eye--left" aria-hidden="true">
+        <img class="spiral-eye__graphic" src="./assets/spiral-left.svg" alt="" />
+      </div>
+
+      <div class="spiral-eye spiral-eye--right" aria-hidden="true">
+        <img class="spiral-eye__graphic" src="./assets/spiral-right.svg" alt="" />
+      </div>
+
+      <svg class="orbit-line" viewBox="0 0 1280 600" aria-hidden="true" focusable="false">
+        <defs>
+          <mask id="orbit-eye-cutouts" maskUnits="userSpaceOnUse">
+            <rect width="1280" height="600" fill="white" />
+            <ellipse cx="350" cy="343" rx="205" ry="185" fill="black" />
+            <ellipse cx="921" cy="329" rx="195" ry="205" fill="black" />
+          </mask>
+        </defs>
+        <ellipse class="orbit-line__stroke" cx="640" cy="270" rx="550" ry="155" mask="url(#orbit-eye-cutouts)" />
+      </svg>
+
+      <div class="star-orbit" aria-hidden="true">
+        <img class="orbit-star orbit-star--1" src="./assets/star-red.svg" alt="" />
+        <img class="orbit-star orbit-star--2" src="./assets/star-orange.svg" alt="" />
+        <img class="orbit-star orbit-star--3" src="./assets/star-purple.svg" alt="" />
+        <img class="orbit-star orbit-star--4" src="./assets/star-pink.svg" alt="" />
+        <img class="orbit-star orbit-star--5" src="./assets/star-coral.svg" alt="" />
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,449 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  z-index: 2;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform, translate;
+  animation:
+    normal-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    eye-drift 14s ease-in-out infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+  --drift-1: -0.45cqw;
+  --drift-2: 0.65cqw;
+}
+
+.eye--right {
+  left: 58.984375%;
+  --drift-1: 0.45cqw;
+  --drift-2: -0.65cqw;
+}
+
+.eye__pupil {
+  position: absolute;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  will-change: transform;
+  animation: pupil-whirl 14s cubic-bezier(0.3, 0, 0.2, 1) infinite;
+}
+
+.eye__highlight {
+  position: absolute;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 48%) 0%, rgb(255 255 255 / 30%) 48%, rgb(255 255 255 / 12%) 100%);
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+  will-change: transform;
+  animation: highlight-whirl 14s cubic-bezier(0.3, 0, 0.2, 1) infinite;
+}
+
+.spiral-eye {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.06);
+  transform-origin: 50% 50%;
+  will-change: opacity, transform, translate;
+  animation:
+    spiral-eye-cycle 14s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    spiral-wobble 2.3s ease-in-out infinite;
+}
+
+.spiral-eye--left {
+  top: 9.9479167%;
+  left: 14.21875%;
+  width: 26.328125%;
+  height: 15.8333333%;
+  --spin-end: 360deg;
+}
+
+.spiral-eye--right {
+  top: 8.1770833%;
+  left: 59.296875%;
+  width: 25.390625%;
+  height: 17.8645833%;
+  --spin-end: -360deg;
+}
+
+.spiral-eye__graphic {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+  transform-origin: 50% 50%;
+  will-change: transform;
+  animation: spiral-spin 1.65s linear infinite;
+}
+
+.star-orbit {
+  position: absolute;
+  z-index: 3;
+  top: 1.5%;
+  left: 4%;
+  width: 92%;
+  height: 27%;
+  opacity: 0;
+  transform: scale(0.82);
+  transform-origin: 50% 52%;
+  pointer-events: none;
+  will-change: opacity, transform;
+  animation: star-field-cycle 14s ease-in-out infinite;
+}
+
+.orbit-line {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 31.25%;
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+  animation: orbit-line-cycle 14s ease-in-out infinite;
+}
+
+.orbit-line__stroke {
+  fill: none;
+  stroke: rgb(255 92 61 / 62%);
+  stroke-width: 10;
+}
+
+.orbit-star {
+  --star-size: 6cqw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: var(--star-size);
+  aspect-ratio: 1;
+  offset-path: ellipse(43% 26% at 50% 55%);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  will-change: offset-distance, transform;
+  animation: star-orbit 2.8s linear infinite;
+}
+
+.orbit-star--1 {
+  --star-size: 6.5cqw;
+  animation-delay: -0.1s;
+}
+
+.orbit-star--2 {
+  --star-size: 5.2cqw;
+  animation-delay: -0.66s;
+}
+
+.orbit-star--3 {
+  --star-size: 7.2cqw;
+  animation-delay: -1.22s;
+}
+
+.orbit-star--4 {
+  --star-size: 5.8cqw;
+  animation-delay: -1.78s;
+}
+
+.orbit-star--5 {
+  --star-size: 4.6cqw;
+  animation-delay: -2.34s;
+}
+
+.is-paused .eye,
+.is-paused .eye__pupil,
+.is-paused .eye__highlight,
+.is-paused .spiral-eye,
+.is-paused .spiral-eye__graphic,
+.is-paused .orbit-line,
+.is-paused .star-orbit,
+.is-paused .orbit-star {
+  animation-play-state: paused;
+}
+
+@keyframes normal-eye-cycle {
+  0%,
+  10%,
+  14%,
+  20%,
+  24%,
+  31%,
+  90%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  12%,
+  22%,
+  33%,
+  88% {
+    opacity: 1;
+    transform: scaleY(0.07);
+  }
+
+  35%,
+  86% {
+    opacity: 0;
+    transform: scaleY(0.07);
+  }
+}
+
+@keyframes eye-drift {
+  0%,
+  7%,
+  33%,
+  100% {
+    translate: 0 0;
+  }
+
+  14% {
+    translate: var(--drift-1) -0.15cqw;
+  }
+
+  22% {
+    translate: var(--drift-2) 0.25cqw;
+  }
+
+  29% {
+    translate: 0 0.35cqw;
+  }
+}
+
+@keyframes pupil-whirl {
+  0%,
+  8%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  13% {
+    transform: translate(-0.7cqw, 0.2cqw);
+  }
+
+  18% {
+    transform: translate(0.9cqw, -0.35cqw);
+  }
+
+  23% {
+    transform: translate(0.4cqw, 0.85cqw);
+  }
+
+  28% {
+    transform: translate(-0.75cqw, 0.5cqw);
+  }
+
+  34% {
+    transform: translate(0, 0);
+  }
+
+  40%,
+  86% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes highlight-whirl {
+  0%,
+  8%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  13% {
+    transform: translate(-0.7cqw, 0.2cqw);
+  }
+
+  18% {
+    transform: translate(0.9cqw, -0.35cqw);
+  }
+
+  23% {
+    transform: translate(0.4cqw, 0.85cqw);
+  }
+
+  28% {
+    transform: translate(-0.75cqw, 0.5cqw);
+  }
+
+  34% {
+    transform: translate(0, 0);
+  }
+
+  40%,
+  86% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes spiral-eye-cycle {
+  0%,
+  33%,
+  88%,
+  100% {
+    opacity: 0;
+    transform: scale(0.06);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(0.1);
+  }
+
+  42%,
+  81% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  86% {
+    opacity: 1;
+    transform: scale(0.08);
+  }
+}
+
+@keyframes spiral-wobble {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  25% {
+    translate: 0.7cqw -0.45cqw;
+  }
+
+  50% {
+    translate: -0.8cqw 0.5cqw;
+  }
+
+  75% {
+    translate: 0.45cqw 0.75cqw;
+  }
+}
+
+@keyframes spiral-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(var(--spin-end));
+  }
+}
+
+@keyframes star-field-cycle {
+  0%,
+  35%,
+  87%,
+  100% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+
+  40%,
+  82% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes orbit-line-cycle {
+  0%,
+  35%,
+  87%,
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  40%,
+  82% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes star-orbit {
+  0% {
+    offset-distance: 0%;
+    transform: rotate(0deg) scale(0.95);
+  }
+
+  25% {
+    transform: rotate(6deg) scale(1.03);
+  }
+
+  50% {
+    transform: rotate(0deg) scale(0.98);
+  }
+
+  75% {
+    transform: rotate(-6deg) scale(1.03);
+  }
+
+  100% {
+    offset-distance: 100%;
+    transform: rotate(0deg) scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye,
+  .eye__pupil,
+  .eye__highlight,
+  .spiral-eye,
+  .spiral-eye__graphic,
+  .orbit-line,
+  .star-orbit,
+  .orbit-star {
+    animation: none;
+  }
+}
