@@ -1,0 +1,97 @@
+:root { color-scheme:dark; background:#000; }
+* { box-sizing:border-box; }
+html,body { width:100%; min-width:320px; height:100%; margin:0; overflow:hidden; background:#000; }
+body { display:grid; place-items:center; }
+.face { position:relative; container-type:inline-size; width:min(100vw,66.6667vh); height:min(150vw,100vh); overflow:hidden; background:#000; }
+
+.eye {
+  position:absolute; z-index:3; top:8.5417%; width:26.875%; aspect-ratio:1; overflow:hidden;
+  border-radius:50%; background:#fff; transform-origin:50% 50%;
+  animation:open-eye-cycle 13s cubic-bezier(.4,0,.2,1) infinite, hurt-tremble 2.4s ease-in-out infinite;
+}
+.eye--left { left:14.1406%; animation-delay:0s,-.18s; }
+.eye--right { left:58.9844%; }
+.pupil { position:absolute; top:20.93%; left:16%; width:68.02%; aspect-ratio:1; border-radius:50%; background:#000; animation:weary-gaze 5.4s cubic-bezier(.45,0,.2,1) infinite; }
+.glint {
+  position:absolute; z-index:2; top:34.593%; left:28.488%; width:11.6279%; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle,rgb(255 255 255 / 48%) 0%,rgb(255 255 255 / 30%) 48%,rgb(255 255 255 / 12%) 100%);
+  filter:blur(clamp(1.1px,.703125cqw,9px)); animation:weary-gaze 5.4s cubic-bezier(.45,0,.2,1) infinite;
+}
+.sad-eye {
+  position:absolute; z-index:3; top:17.2%; width:26.875%; height:9.15%;
+  border:2.65625cqw solid #fff; border-top:0; border-radius:0 0 50% 50% / 0 0 100% 100%;
+  opacity:0; transform:scaleY(.06); transform-origin:50% 0;
+  animation:sad-eye-cycle 13s cubic-bezier(.4,0,.2,1) infinite, hurt-tremble 2.4s ease-in-out infinite;
+}
+.sad-eye--left { left:14.1406%; animation-delay:0s,-.18s; }
+.sad-eye--right { left:58.9844%; }
+
+.injury-layer { position:absolute; z-index:2; inset:0; pointer-events:none; opacity:0; animation:injury-cycle 13s cubic-bezier(.4,0,.2,1) infinite; }
+.bruise {
+  position:absolute; z-index:1; height:auto; opacity:.94;
+  transform-origin:52% 48%; animation:bruise-pulse 3.2s ease-in-out infinite;
+  filter:drop-shadow(0 0 2.2cqw rgb(71 109 202 / 25%));
+}
+.bruise--main { top:3.1%; left:52%; width:41%; }
+.bruise--left-cheek { top:7.2%; left:2.4%; width:22%; opacity:.64; rotate:-19deg; animation-delay:-1.2s; }
+.bruise--right-cheek { top:27.5%; left:75.5%; width:17.5%; opacity:.52; rotate:17deg; animation-delay:-2.1s; }
+.bandage {
+  position:absolute; z-index:3; top:5.6%; left:1.8%; width:25%; height:auto; transform-origin:50% 50%;
+  animation:bandage-settle 2.6s cubic-bezier(.2,.7,.2,1) infinite;
+  filter:drop-shadow(0 .8cqw .65cqw rgb(0 0 0 / 32%));
+}
+.bandage-cross {
+  position:absolute; z-index:3; top:27%; right:3.2%; width:15.5%; height:auto; transform-origin:50% 50%;
+  animation:cross-settle 3s cubic-bezier(.2,.7,.2,1) infinite;
+  filter:drop-shadow(0 .6cqw .55cqw rgb(0 0 0 / 30%));
+}
+.pain-mark { position:absolute; z-index:2; top:26.2%; width:1.2%; height:5.8%; border-radius:999px; background:#7f68bd; opacity:.62; }
+.pain-mark--1 { left:87%; rotate:29deg; }
+.pain-mark--2 { left:91.7%; top:24.6%; height:4.4%; rotate:48deg; }
+.is-paused * { animation-play-state:paused !important; }
+
+@keyframes open-eye-cycle {
+  0%,12%,16%,30%,34%,38%,86%,91%,95%,100% { opacity:1; transform:scaleY(1); }
+  14%,32%,40%,89%,93% { opacity:1; transform:scaleY(.07); }
+  42%,84% { opacity:0; transform:scaleY(.07); }
+}
+@keyframes sad-eye-cycle {
+  0%,40%,87%,100% { opacity:0; transform:scaleY(.06); }
+  42% { opacity:1; transform:scaleY(.08); }
+  48%,80% { opacity:1; transform:scaleY(1); }
+  84% { opacity:1; transform:scaleY(.08); }
+}
+@keyframes injury-cycle {
+  0%,16%,100% { opacity:0; transform:scale(.94); }
+  22% { opacity:.18; transform:scale(.96); }
+  31% { opacity:.72; transform:scale(.99); }
+  40%,92% { opacity:1; transform:scale(1); }
+  97% { opacity:.42; transform:scale(.98); }
+}
+@keyframes weary-gaze {
+  0%,100% { transform:translate(0,0); }
+  24%,38% { transform:translate(-.65cqw,.65cqw); }
+  57%,72% { transform:translate(.7cqw,.9cqw); }
+  86% { transform:translate(.1cqw,.35cqw); }
+}
+@keyframes hurt-tremble {
+  0%,100% { translate:0 0; }
+  32% { translate:.18cqw .2cqw; }
+  61% { translate:-.24cqw -.1cqw; }
+  82% { translate:.12cqw .16cqw; }
+}
+@keyframes bruise-pulse {
+  0%,100% { transform:scale(.97) rotate(-2deg); opacity:.82; }
+  50% { transform:scale(1.035) rotate(1deg); opacity:1; }
+}
+@keyframes bandage-settle {
+  0%,100% { transform:rotate(-14deg) translateY(0); }
+  45% { transform:rotate(-10deg) translateY(.35cqw); }
+  70% { transform:rotate(-13deg) translateY(.1cqw); }
+}
+@keyframes cross-settle {
+  0%,100% { transform:rotate(7deg) scale(.97); }
+  48% { transform:rotate(11deg) scale(1.035); }
+  72% { transform:rotate(8deg) scale(1); }
+}
+@media (prefers-reduced-motion:reduce) { .eye,.pupil,.glint,.sad-eye,.injury-layer,.bruise,.bandage,.bandage-cross { animation:none; } }

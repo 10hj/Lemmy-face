@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Injured Eyes</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="face" aria-label="멍과 반창고가 나타나는 다친 표정">
+      <div class="injury-layer" aria-hidden="true">
+        <img class="bruise bruise--main" src="./assets/bruise.svg" alt="" />
+        <img class="bruise bruise--left-cheek" src="./assets/bruise.svg" alt="" />
+        <img class="bruise bruise--right-cheek" src="./assets/bruise.svg" alt="" />
+        <img class="bandage" src="./assets/bandage.svg" alt="" />
+        <img class="bandage-cross" src="./assets/bandage-cross.svg" alt="" />
+        <span class="pain-mark pain-mark--1"></span>
+        <span class="pain-mark pain-mark--2"></span>
+      </div>
+
+      <div class="eye eye--left" aria-hidden="true"><span class="pupil"></span><span class="glint"></span></div>
+      <div class="eye eye--right" aria-hidden="true"><span class="pupil"></span><span class="glint"></span></div>
+      <span class="sad-eye sad-eye--left" aria-hidden="true"></span>
+      <span class="sad-eye sad-eye--right" aria-hidden="true"></span>
+    </main>
+  </body>
+</html>
