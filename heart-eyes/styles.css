@@ -1,0 +1,424 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.artwork {
+  position: relative;
+  container-type: inline-size;
+  width: min(100vw, 66.6667vh);
+  height: min(150vw, 100vh);
+  overflow: hidden;
+  background: #000;
+}
+
+.eye {
+  position: absolute;
+  top: 8.5416667%;
+  width: 26.875%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 50% 50%;
+  will-change: opacity, transform, translate;
+  animation:
+    normal-eye-cycle 18s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    eye-drift 8.2s ease-in-out infinite;
+}
+
+.eye--left {
+  left: 14.140625%;
+}
+
+.eye--right {
+  left: 58.984375%;
+}
+
+.eye__pupil {
+  position: absolute;
+  top: 20.9302326%;
+  left: 15.9883721%;
+  width: 68.0232558%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  will-change: transform;
+  animation: pupil-gaze 8.2s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.eye__highlight {
+  position: absolute;
+  top: 34.5930233%;
+  left: 28.4883721%;
+  width: 11.627907%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 48%) 0%, rgb(255 255 255 / 30%) 48%, rgb(255 255 255 / 12%) 100%);
+  filter: blur(clamp(1.1px, 0.703125cqw, 9px));
+  will-change: transform;
+  animation: highlight-gaze 8.2s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.heart {
+  position: absolute;
+  z-index: 1;
+  top: 9.375%;
+  width: 27.5%;
+  height: 16.9791667%;
+  opacity: 0;
+  transform: scale(0.06);
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
+  animation: heart-eye-cycle 18s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.heart--left {
+  left: 13.828125%;
+  --heart-tilt: -1.2deg;
+}
+
+.heart--right {
+  left: 58.75%;
+  --heart-tilt: 1.2deg;
+}
+
+.happy-eye {
+  position: absolute;
+  z-index: 1;
+  top: 8.5416667%;
+  width: 26.875%;
+  height: 8.9583333%;
+  border: 2.65625cqw solid #fff;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  opacity: 0;
+  transform: scaleY(0.06);
+  transform-origin: 50% 100%;
+  will-change: opacity, transform, translate;
+  animation:
+    happy-eye-cycle 18s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    eye-drift 8.2s ease-in-out infinite;
+}
+
+.happy-eye--left {
+  left: 14.140625%;
+}
+
+.happy-eye--right {
+  left: 58.984375%;
+}
+
+.floating-hearts {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.spark-heart {
+  --rise: -16cqw;
+  --drift: 0cqw;
+  --turn: 8deg;
+  position: absolute;
+  display: block;
+  width: var(--size);
+  height: auto;
+  opacity: 0;
+  transform: translate(0, 2cqw) rotate(0) scale(0.2);
+  transform-origin: 50% 50%;
+  will-change: opacity, transform;
+  animation: heart-float 18s ease-out infinite;
+}
+
+.spark-heart--1 {
+  --size: 5.4%;
+  --rise: -15cqw;
+  --drift: -2.5cqw;
+  --turn: -14deg;
+  left: 8%;
+  top: 32%;
+}
+
+.spark-heart--2 {
+  --size: 4.4%;
+  --rise: -20cqw;
+  --drift: 1.5cqw;
+  --turn: 18deg;
+  left: 22%;
+  top: 24%;
+  animation-delay: 0.35s;
+}
+
+.spark-heart--3 {
+  --size: 4.9%;
+  --rise: -16cqw;
+  --drift: 2.8cqw;
+  --turn: 12deg;
+  left: 35%;
+  top: 36%;
+  animation-delay: 0.7s;
+}
+
+.spark-heart--4 {
+  --size: 4.6%;
+  --rise: -18cqw;
+  --drift: -2.2cqw;
+  --turn: -18deg;
+  left: 61%;
+  top: 23%;
+  animation-delay: 0.2s;
+}
+
+.spark-heart--5 {
+  --size: 5.6%;
+  --rise: -16cqw;
+  --drift: 2.6cqw;
+  --turn: 15deg;
+  left: 76%;
+  top: 35%;
+  animation-delay: 0.55s;
+}
+
+.spark-heart--6 {
+  --size: 4.2%;
+  --rise: -21cqw;
+  --drift: -1.8cqw;
+  --turn: -10deg;
+  left: 89%;
+  top: 27%;
+  animation-delay: 0.9s;
+}
+
+.is-paused .eye,
+.is-paused .eye__pupil,
+.is-paused .eye__highlight,
+.is-paused .heart,
+.is-paused .happy-eye,
+.is-paused .spark-heart {
+  animation-play-state: paused;
+}
+
+@keyframes normal-eye-cycle {
+  0%,
+  9%,
+  12%,
+  18%,
+  63%,
+  68%,
+  94%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  10.5%,
+  20%,
+  61.5%,
+  70%,
+  92% {
+    opacity: 1;
+    transform: scaleY(0.07);
+  }
+
+  21%,
+  60%,
+  71%,
+  90% {
+    opacity: 0;
+    transform: scaleY(0.07);
+  }
+}
+
+@keyframes heart-eye-cycle {
+  0%,
+  19%,
+  61.5%,
+  100% {
+    opacity: 0;
+    transform: rotate(var(--heart-tilt)) scale(0.06);
+  }
+
+  21% {
+    opacity: 1;
+    transform: rotate(var(--heart-tilt)) scale(0.18);
+  }
+
+  25% {
+    opacity: 1;
+    transform: rotate(var(--heart-tilt)) scale(1);
+  }
+
+  31% {
+    opacity: 1;
+    transform: rotate(var(--heart-tilt)) scale(1.08);
+  }
+
+  35%,
+  43%,
+  51% {
+    opacity: 1;
+    transform: rotate(var(--heart-tilt)) scale(1);
+  }
+
+  39%,
+  47%,
+  55% {
+    opacity: 1;
+    transform: rotate(var(--heart-tilt)) scale(1.055);
+  }
+
+  59.5% {
+    opacity: 1;
+    transform: rotate(var(--heart-tilt)) scale(0.08);
+  }
+}
+
+@keyframes happy-eye-cycle {
+  0%,
+  69%,
+  94%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.06);
+  }
+
+  71% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+
+  76%,
+  89% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  92% {
+    opacity: 1;
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes heart-float {
+  0%,
+  72% {
+    opacity: 0;
+    transform: translate(0, 2cqw) rotate(0) scale(0.2);
+  }
+
+  76% {
+    opacity: 0.95;
+    transform: translate(0, 0) rotate(0) scale(0.82);
+  }
+
+  82% {
+    opacity: 1;
+    transform: translate(calc(var(--drift) * 0.45), calc(var(--rise) * 0.42)) rotate(calc(var(--turn) * 0.45)) scale(1);
+  }
+
+  90% {
+    opacity: 0;
+    transform: translate(var(--drift), var(--rise)) rotate(var(--turn)) scale(0.76);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), var(--rise)) rotate(var(--turn)) scale(0.76);
+  }
+}
+
+@keyframes eye-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  25% {
+    translate: 0.65cqw -0.25cqw;
+  }
+
+  50% {
+    translate: -0.5cqw 0.4cqw;
+  }
+
+  75% {
+    translate: 0.25cqw 0.55cqw;
+  }
+}
+
+@keyframes pupil-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-1.1cqw, 0.4cqw);
+  }
+
+  38% {
+    transform: translate(1.2cqw, -0.35cqw);
+  }
+
+  54% {
+    transform: translate(0.35cqw, 0.8cqw);
+  }
+
+  78% {
+    transform: translate(-0.7cqw, 0.5cqw);
+  }
+}
+
+@keyframes highlight-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-1.1cqw, 0.4cqw);
+  }
+
+  38% {
+    transform: translate(1.2cqw, -0.35cqw);
+  }
+
+  54% {
+    transform: translate(0.35cqw, 0.8cqw);
+  }
+
+  78% {
+    transform: translate(-0.7cqw, 0.5cqw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye,
+  .eye__pupil,
+  .eye__highlight,
+  .heart,
+  .happy-eye,
+  .spark-heart {
+    animation: none;
+  }
+}
