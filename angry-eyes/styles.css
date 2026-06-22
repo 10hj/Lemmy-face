@@ -1,0 +1,46 @@
+:root { color-scheme:dark; background:#000; }
+* { box-sizing:border-box; }
+html,body { width:100%; min-width:320px; height:100%; margin:0; overflow:hidden; background:#000; }
+body { display:grid; place-items:center; }
+.face { position:relative; container-type:inline-size; width:min(100vw,66.6667vh); height:min(150vw,100vh); overflow:hidden; background:#000; }
+.face::before {
+  content:""; position:absolute; z-index:1; top:1%; left:8%; width:84%; height:34%; border-radius:50%;
+  background:radial-gradient(ellipse,rgb(191 25 49 / 25%) 0%,rgb(191 25 49 / 9%) 44%,transparent 74%);
+  filter:blur(4cqw); animation:heat-pulse 2.4s ease-in-out infinite;
+}
+.angry-eye {
+  position:absolute; z-index:3; top:17.2%; width:26.875%; height:9.15%;
+  border:2.65625cqw solid #fff; border-top:0; border-radius:0 0 50% 50% / 0 0 100% 100%;
+  transform-origin:50% 0; animation:angry-squint 6.4s cubic-bezier(.4,0,.2,1) infinite,rage-shake .72s ease-in-out infinite;
+}
+.angry-eye--left { left:14.1406%; --eye-tilt:3deg; animation-delay:0s,-.08s; }
+.angry-eye--right { left:58.9844%; --eye-tilt:-3deg; }
+.anger-mark {
+  position:absolute; z-index:5; top:3.8%; right:4.2%; width:15%; height:auto; transform-origin:50% 50%;
+  animation:anger-pop 6.4s cubic-bezier(.18,.8,.2,1) infinite; filter:drop-shadow(0 0 1.2cqw rgb(191 25 49 / 48%));
+}
+.is-paused * { animation-play-state:paused !important; }
+@keyframes angry-squint {
+  0%,100% { transform:scaleY(.9) rotate(var(--eye-tilt)); }
+  18% { transform:scaleY(.68) rotate(var(--eye-tilt)); }
+  32% { transform:scaleY(1.06) rotate(var(--eye-tilt)); }
+  46%,70% { transform:scaleY(.76) rotate(var(--eye-tilt)); }
+  82% { transform:scaleY(1.02) rotate(var(--eye-tilt)); }
+}
+@keyframes rage-shake {
+  0%,100% { translate:0 0; }
+  25% { translate:.34cqw .12cqw; }
+  50% { translate:-.42cqw -.08cqw; }
+  75% { translate:.22cqw .14cqw; }
+}
+@keyframes anger-pop {
+  0%,8% { opacity:0; transform:scale(.3) rotate(-10deg); }
+  22% { opacity:1; transform:scale(1.1) rotate(3deg); }
+  30%,72% { opacity:1; transform:scale(1) rotate(0); }
+  100% { opacity:0; transform:scale(.3) rotate(-10deg); }
+}
+@keyframes heat-pulse {
+  0%,100% { opacity:.42; transform:scale(.94); }
+  50% { opacity:1; transform:scale(1.06); }
+}
+@media (prefers-reduced-motion:reduce) { .angry-eye,.anger-mark,.face::before { animation:none; } }
