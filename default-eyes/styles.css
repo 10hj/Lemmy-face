@@ -1,0 +1,62 @@
+:root { color-scheme:dark; background:#000; }
+* { box-sizing:border-box; }
+html,body { width:100%; min-width:320px; height:100%; margin:0; overflow:hidden; background:#000; }
+body { display:grid; place-items:center; }
+.face { position:relative; container-type:inline-size; width:min(100vw,66.6667vh); height:min(150vw,100vh); overflow:hidden; background:#000; }
+
+.eye {
+  position:absolute; z-index:2; top:8.5417%; width:26.875%; aspect-ratio:1; overflow:hidden;
+  border-radius:50%; background:#fff; transform-origin:50% 50%;
+  animation:open-eye-cycle 14s cubic-bezier(.4,0,.2,1) infinite, head-turn 14s cubic-bezier(.42,0,.2,1) infinite;
+}
+.eye--left { left:14.1406%; --left-turn-scale:1.025; --right-turn-scale:.975; }
+.eye--right { left:58.9844%; --left-turn-scale:.975; --right-turn-scale:1.025; }
+.pupil {
+  position:absolute; top:20.93%; left:16%; width:68.02%; aspect-ratio:1; border-radius:50%; background:#000;
+  animation:gaze-story 14s cubic-bezier(.42,0,.2,1) infinite;
+}
+.glint {
+  position:absolute; z-index:2; top:34.593%; left:28.488%; width:11.6279%; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle,rgb(255 255 255 / 48%) 0%,rgb(255 255 255 / 30%) 48%,rgb(255 255 255 / 12%) 100%);
+  filter:blur(clamp(1.1px,.703125cqw,9px)); animation:gaze-story 14s cubic-bezier(.42,0,.2,1) infinite;
+}
+.happy-eye {
+  position:absolute; z-index:2; top:8.5417%; width:26.875%; height:8.9583%;
+  border:2.65625cqw solid #fff; border-bottom:0; border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  opacity:0; transform:scaleY(.06); transform-origin:50% 100%;
+  animation:happy-eye-cycle 14s cubic-bezier(.4,0,.2,1) infinite, head-turn 14s cubic-bezier(.42,0,.2,1) infinite;
+}
+.happy-eye--left { left:14.1406%; --left-turn-scale:1.025; --right-turn-scale:.975; }
+.happy-eye--right { left:58.9844%; --left-turn-scale:.975; --right-turn-scale:1.025; }
+.is-paused * { animation-play-state:paused !important; }
+
+@keyframes open-eye-cycle {
+  0%,9%,13%,29%,33%,44%,48%,58%,90%,94%,100% { opacity:1; transform:scaleY(1); }
+  11%,31%,46%,61%,87%,92% { opacity:1; transform:scaleY(.07); }
+  64%,85% { opacity:0; transform:scaleY(.07); }
+}
+@keyframes happy-eye-cycle {
+  0%,61%,88%,100% { opacity:0; transform:scaleY(.06); }
+  64% { opacity:1; transform:scaleY(.08); }
+  70%,81% { opacity:1; transform:scaleY(1); }
+  85% { opacity:1; transform:scaleY(.08); }
+}
+@keyframes gaze-story {
+  0%,11% { transform:translate(0,0); }
+  20%,31% { transform:translate(-.86cqw,-.18cqw); }
+  43%,60% { transform:translate(0,0); }
+  63%,88% { transform:translate(0,0); }
+  93%,96% { transform:translate(.08cqw,-.92cqw); }
+  100% { transform:translate(0,0); }
+}
+@keyframes head-turn {
+  0%,11%,100% { translate:0 0; scale:1; }
+  20%,31% { translate:-1.02cqw .1cqw; scale:var(--left-turn-scale); }
+  43%,60% { translate:0 -.12cqw; scale:1; }
+  63% { translate:0 0; scale:1; }
+  72% { translate:.2cqw -.25cqw; scale:1.008; }
+  81% { translate:-.14cqw -.1cqw; scale:.997; }
+  88% { translate:0 0; scale:1; }
+  93%,96% { translate:.06cqw -.52cqw; scale:1.008; }
+}
+@media (prefers-reduced-motion:reduce) { .eye,.pupil,.glint,.happy-eye { animation:none; } }
